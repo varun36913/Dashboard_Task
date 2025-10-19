@@ -1,0 +1,176 @@
+{
+  "dashboard": {
+    "overallOutstanding": "12341233",
+    "stats": [
+      { "id": "invoice-received", "title": "Invoice Received", "total": 2123, "amount": "12341233234","icon": "Invoice_Received.svg" },
+      { "id": "payable", "title": "Payable amount", "total": 2123, "amount": "12341233","icon": "Payable_amount.svg" },
+      { "id": "overdue", "title": "Overdue", "total": 2123, "amount": "12341233","icon": "Overdue.svg" },
+      { "id": "paid", "title": "Paid amount", "total": 2123, "amount": "12341233","icon": "Paid_amount.svg" },
+      { "id": "rejected", "title": "Rejected", "total": 2123, "amount": "12341233234","icon": "Rejected.svg" },
+      { "id": "dispute", "title": "Dispute", "total": 2123, "amount": "12341233","icon": "Dispute.svg" },
+      { "id": "department", "title": "Department", "total": 2123, "amount": "12341233","icon": "Department.svg" },
+      { "id": "vendors", "title": "Vendors", "total": 2123, "amount": "12341233","icon": "Vendors.svg" }
+    ],
+    "queues": [
+      { "name": "Processing Queue", "value": 54,"color":" #4BAAB4" },
+      { "name": "Exception Queue", "value": 15,"color":"#EA5455" },
+      { "name": "Duplicate Queue", "value": 8,"color":"#1F2439" },
+      { "name": "Missing PO Queue", "value": 12,"color":"#F5B461" },
+      { "name": "Receipt Hold Queue", "value": 6,"color":"#F9C480" },
+      { "name": "Supplier Portal Queue", "value": 5,"color":"#EA5455" }
+    ],
+    "kpi": [
+      { "label": "Role", "value": 30,"color":"#F4B462"  },
+      { "label": "Person Responsible", "value": 54,"color":"#4BAAB4"  },
+      { "label": "Triggers Alert", "value": 26,"color":"#1F2439"  }
+    ],
+    "dueByAge": [
+      { "id": "7", "label": "7 Days", "amount": "1234234" },
+      { "id": "15", "label": "15 Days", "amount": "287313123" },
+      { "id": "30", "label": "30 Days", "amount": "01301" },
+      { "id": "45", "label": "45 Days", "amount": "12234445" },
+      { "id": "60", "label": "60 Days", "amount": "1200" },
+      { "id": "90", "label": "90 Days", "amount": "1237234" },
+      { "id": "180", "label": "180 Days +", "amount": "122" }
+    ],
+    "penaltySaved": "12344"
+  },
+  "sidebar": [
+    {
+      "key": "dashboard",
+      "label": "Dashboard",
+      "icon": "Dashboard_1.svg",
+      "active": true
+    },
+    {
+      "key": "report",
+      "label": "Report",
+      "icon": "Report.svg",
+      "active": false
+    },
+    {
+      "key": "add-invoice",
+      "label": "Add Invoice",
+      "icon": "Add_Invoice.svg",
+      "active": false
+    },
+    {
+      "key": "add-user",
+      "label": "Add User",
+      "icon": "Add_User.svg",
+      "active": false
+    },
+    {
+      "key": "without-po",
+      "label": "Without PO",
+      "icon": "Without_PO.svg",
+      "active": false
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "icon": "Company.svg",
+      "active": false
+    }
+  ],"invoices": [
+  {
+    "id": 1,
+    "company": "Geodesic",
+    "gst": "22AAAAA0000A1Z5",
+    "orderId": "SD100037",
+    "invoiceId": "1234",
+    "issuedDate": "22-02-2222",
+    "amount": "12341233",
+    "department": "Accounts",
+     "remark": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ‘Content here, content here’, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum"
+  },
+  {
+    "id": 2,
+    "company": "OPtipace Technology PVT",
+    "gst": "22AAAAA0000A1Z5",
+    "orderId": "SD100038",
+    "invoiceId": "213",
+    "issuedDate": "22-02-2222",
+    "amount": "3141515",
+    "department": "Admin",
+    "remark": "Invoice not paid due to missing PO approval from finance department."
+  },
+  {
+    "id": 3,
+    "company": "Sony",
+    "gst": "22AAAAA0000A1Z5",
+    "orderId": "qw100037",
+    "invoiceId": "432",
+    "issuedDate": "22-02-2222",
+    "amount": "561514151",
+    "department": "Finance",
+    "remark": "Invoice cleared but awaiting confirmation in system. Expected update next cycle."
+  },
+  {
+    "id": 4,
+    "company": "IBM",
+    "gst": "22AAAAA0000A1Z5",
+    "orderId": "Qsdr100037",
+    "invoiceId": "223",
+    "issuedDate": "22-02-2222",
+    "amount": "5424247",
+    "department": "Accounts",
+    "remark": "Invoice not paid due to missing PO approval from finance department."
+  },
+  {
+    "id": 5,
+    "company": "ITC Infotech India LTD",
+    "gst": "22AAAAA0000A1Z5",
+    "orderId": "We100037",
+    "invoiceId": "112234",
+    "issuedDate": "22-02-2222",
+    "amount": "43536334",
+    "department": "Admin",
+    "remark": "Invoice not paid due to missing PO approval from finance department."
+  },
+  {
+    "id": 6,
+    "company": "DELL",
+    "gst": "22AAAAA0000A1Z5",
+    "orderId": "Qwe100037",
+    "invoiceId": "234",
+    "issuedDate": "22-02-2222",
+    "amount": "72672552",
+    "department": "Legal",
+    "remark": "Invoice cleared but awaiting confirmation in system. Expected update next cycle."
+  },
+  {
+    "id": 7,
+    "company": "Apple Mac India",
+    "gst": "22AAAAA0000A1Z5",
+    "orderId": "AaSD100037",
+    "invoiceId": "1234",
+    "issuedDate": "22-02-2222",
+    "amount": "0292872",
+    "department": "Recovery",
+    "remark": "Invoice not paid due to missing PO approval from finance department."
+  },
+  {
+    "id": 8,
+    "company": "Microsoft PVT Ltd",
+    "gst": "22AAAAA0000A1Z5",
+    "orderId": "SDwe100037",
+    "invoiceId": "112334445555",
+    "issuedDate": "22-02-2222",
+    "amount": "272727662626",
+    "department": "Treasury",
+    "remark": "Invoice not paid due to missing PO approval from finance department."
+  },
+  {
+    "id": 9,
+    "company": "HP PVT Ltd",
+    "gst": "22AAAAA0000A1Z5",
+    "orderId": "SD10900037",
+    "invoiceId": "112234455",
+    "issuedDate": "22-02-2222",
+    "amount": "82872",
+    "department": "Accounts",
+    "remark": "Invoice cleared but awaiting confirmation in system. Expected update next cycle."
+  }
+]
+}

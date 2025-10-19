@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+.card {
+  @apply bg-white rounded-lg p-4 shadow-sm;
+}/* Make sure the body content sits below the navbar */
+body {
+  padding-top: 3.5rem; /* same as nav height (14 -> 56px = 3.5rem) */
+}
+
+/* On small screens, left margin less */
+@media (min-width: 768px) {
+  main {
+    /* left margin for md+ to account for sidebar width 16rem (64) */
+    /* we used ml-64 through tailwind in JSX */
+  }
+}
+
+@layer utilities {
+  .rupee {
+    font-family: 'ITF Rupee', sans-serif;
+  }
+}
