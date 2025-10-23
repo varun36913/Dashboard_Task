@@ -5,8 +5,7 @@ import PaginationControl from "../components/PaginationControl";
 import CalendarMini from "../components/CalendarMini";
 import { useNavigate } from "react-router-dom";
 import { Search, SlidersHorizontal } from "lucide-react";
-
-const API = "http://localhost:4000";
+import { API_BASE_URL } from "../API/config";
 
 export default function InvoiceTable() {
   const navigate = useNavigate();
@@ -14,7 +13,7 @@ export default function InvoiceTable() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch(`${API}/invoices`)
+    fetch(`${API_BASE_URL}/invoices`)
       .then((r) => r.json())
       .then((json) => setInvoices(json))
       .catch((err) => console.error("Failed to fetch invoices:", err));
@@ -85,79 +84,91 @@ export default function InvoiceTable() {
           </div>
 
           <div className="mt-6 bg-white rounded-lg shadow-sm border border-[#CFD6E5] overflow-hidden">
-            <table className="w-full text-left text-sm">
-              <thead className="bg-[#FFFFFF] text-[#1F2439] font-semibold">
-                <tr>
-                  <th className="p-3  text-[#141414] font-['Roboto'] text-[16px]">
-                    All
-                  </th>
-                  <th className="p-3  text-[#141414] font-['Roboto'] text-[16px]">
-                    No
-                  </th>
-                  <th className="p-3  text-[#141414] font-['Roboto'] text-[16px]">
-                    Company name
-                  </th>
-                  <th className="p-3  text-[#141414] font-['Roboto'] text-[16px]">
-                    GST or Pan
-                  </th>
-                  <th className="p-3  text-[#141414] font-['Roboto'] text-[16px]">
-                    Order ID
-                  </th>
-                  <th className="p-3  text-[#141414] font-['Roboto'] text-[16px]">
-                    Invoice ID
-                  </th>
-                  <th className="p-3  text-[#141414] font-['Roboto'] text-[16px]">
-                    Issued date
-                  </th>
-                  <th className="p-3  text-[#141414] font-['Roboto'] text-[16px]">
-                    Invoice amount
-                  </th>
-                  <th className="p-3  text-[#141414] font-['Roboto'] text-[16px]">
-                    Department
-                  </th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {filteredInvoices.map((inv, index) => (
-                  <tr
-                    key={inv.id}
-                    className={`border-t border-[#E5E9F2] hover:bg-[#F9FAFB] ${
-                      index % 2 === 0 ? "bg-[#F0F0F0]" : "bg-white"
-                    }`}
-                  >
-                    <td className="p-3">
-                      <input type="checkbox" />
-                    </td>
-                    <td className="p-3 font-normal text-[#575757] font-['Roboto'] text-[14px]">
-                      {inv.id}
-                    </td>
-                    <td className="p-3 font-normal text-[#575757] font-['Roboto'] text-[14px]">
-                      {inv.company}
-                    </td>
-                    <td className="p-3 font-normal text-[#575757] font-['Roboto'] text-[14px]">
-                      {inv.gst}
-                    </td>
-                    <td className="p-3 font-normal text-[#575757] font-['Roboto'] text-[14px]">
-                      {inv.orderId}
-                    </td>
-                    <td className="p-3 font-normal text-[#575757] font-['Roboto'] text-[14px]">
-                      {inv.invoiceId}
-                    </td>
-                    <td className="p-3 font-normal text-[#575757] font-['Roboto'] text-[14px]">
-                      {inv.issuedDate}
-                    </td>
-                    <td className="p-3 font-normal text-[#575757] font-['Roboto'] text-[16px] flex justify-between">
-                      <span>₹</span>{" "}
-                      <span className="text-[#141414] font-['Roboto']">
-                        {inv.amount}
-                      </span>
-                    </td>
-                    <td className="p-3 text-[#7B7C89]">{inv.department}</td>
+            <div
+              className="overflow-auto"
+              style={{
+                maxHeight: "60vh",
+                maxWidth: "79vw",
+                WebkitOverflowScrolling: "touch",
+              }}
+            >
+              <table className="w-full text-left text-sm">
+                <thead className="bg-[#FFFFFF] text-[#1F2439] font-semibold">
+                  <tr>
+                    <th className="p-3  text-[#141414] font-['Roboto'] text-[16px]">
+                      All
+                    </th>
+                    <th className="p-3  text-[#141414] font-['Roboto'] text-[16px]">
+                      No
+                    </th>
+                    <th className="p-3  text-[#141414] font-['Roboto'] text-[16px]">
+                      Company name
+                    </th>
+                    <th className="p-3  text-[#141414] font-['Roboto'] text-[16px]">
+                      GST or Pan
+                    </th>
+                    <th className="p-3  text-[#141414] font-['Roboto'] text-[16px]">
+                      Order ID
+                    </th>
+                    <th className="p-3  text-[#141414] font-['Roboto'] text-[16px]">
+                      Invoice ID
+                    </th>
+                    <th className="p-3  text-[#141414] font-['Roboto'] text-[16px]">
+                      Issued date
+                    </th>
+                    <th className="p-3  text-[#141414] font-['Roboto'] text-[16px]">
+                      Invoice amount
+                    </th>
+                    <th className="p-3  text-[#141414] font-['Roboto'] text-[16px]">
+                      Department
+                    </th>
+                    <th className="p-3  text-[#141414] font-['Roboto'] text-[16px]">
+                      Department 1
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+
+                <tbody>
+                  {filteredInvoices.map((inv, index) => (
+                    <tr
+                      key={inv.id}
+                      className={`border-t border-[#E5E9F2] hover:bg-[#F9FAFB] ${
+                        index % 2 === 0 ? "bg-[#F0F0F0]" : "bg-white"
+                      }`}
+                    >
+                      <td className="p-3">
+                        <input type="checkbox" />
+                      </td>
+                      <td className="p-3 font-normal text-[#575757] font-['Roboto'] text-[14px]">
+                        {inv.id}
+                      </td>
+                      <td className="p-3 font-normal text-[#575757] font-['Roboto'] text-[14px]">
+                        {inv.company}
+                      </td>
+                      <td className="p-3 font-normal text-[#575757] font-['Roboto'] text-[14px]">
+                        {inv.gst}
+                      </td>
+                      <td className="p-3 font-normal text-[#575757] font-['Roboto'] text-[14px]">
+                        {inv.orderId}
+                      </td>
+                      <td className="p-3 font-normal text-[#575757] font-['Roboto'] text-[14px]">
+                        {inv.invoiceId}
+                      </td>
+                      <td className="p-3 font-normal text-[#575757] font-['Roboto'] text-[14px]">
+                        {inv.issuedDate}
+                      </td>
+                      <td className="p-3 font-normal text-[#575757] font-['Roboto'] text-[16px] flex justify-between">
+                        <span>₹</span>{" "}
+                        <span className="text-[#141414] font-['Roboto']">
+                          {inv.amount}
+                        </span>
+                      </td>
+                      <td className="p-3 text-[#7B7C89]">{inv.department}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <div className="mt-8 mb-8">

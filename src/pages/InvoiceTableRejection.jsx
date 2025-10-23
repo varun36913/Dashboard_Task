@@ -6,8 +6,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import PaginationControl from "../components/PaginationControl";
 import { useNavigate } from "react-router-dom";
 import { Search, SlidersHorizontal } from "lucide-react";
-
-const API = "http://localhost:4000";
+import { API_BASE_URL } from "../API/config";
 
 export default function InvoiceTableRejection() {
   const navigate = useNavigate();
@@ -16,7 +15,7 @@ export default function InvoiceTableRejection() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch(`${API}/invoices`)
+    fetch(`${API_BASE_URL}/invoices`)
       .then((r) => r.json())
       .then((json) => setInvoices(json))
       .catch((err) => console.error("Failed to fetch invoices:", err));
@@ -53,14 +52,14 @@ export default function InvoiceTableRejection() {
           </div>
 
           <div className="flex gap-3 mt-6">
-            <button className="px-4 py-2 bg-white rounded-md shadow-sm border border-[#CFD6E5] text-[#1F2439] text-[14px] font-medium hover:bg-[#E9F0FF] transition">
+            <button
+              onClick={() => navigate("/page2")}
+              className="px-4 py-2 bg-white rounded-md shadow-sm border border-[#CFD6E5] text-[#1F2439] text-[14px] font-medium hover:bg-[#E9F0FF] transition"
+            >
               Approval
             </button>
 
-            <button
-              onClick={() => navigate("/page3")}
-              className="px-4 py-2 bg-[#13255B] text-white rounded-md shadow-sm border border-[#13255B] text-[14px] font-medium hover:opacity-90 transition"
-            >
+            <button className="px-4 py-2 bg-[#13255B] text-white rounded-md shadow-sm border border-[#13255B] text-[14px] font-medium hover:opacity-90 transition">
               Rejected
             </button>
 
@@ -90,140 +89,149 @@ export default function InvoiceTableRejection() {
           </div>
 
           <div className="mt-6 bg-white rounded-lg shadow-sm border border-[#CFD6E5] overflow-hidden">
-            <table className="w-full text-left text-sm">
-              <thead className=" bg-[#F5F7FB] text-[#141414] font-semibold font-['Roboto'] text-[13px]">
-                <tr>
-                  <th className="p-3">All</th>
-                  <th className="p-3">No</th>
-                  <th className="p-3">Company name</th>
-                  <th className="p-3">GST or Pan</th>
-                  <th className="p-3">Order ID</th>
-                  <th className="p-3">Invoice ID</th>
-                  <th className="p-3">Issued date</th>
-                  <th className="p-3">Invoice amount</th>
-                  <th className="p-3">Department</th>
-                  <th className="p-3">Remark</th>
-                </tr>
-              </thead>
+            <div
+              className="overflow-auto"
+              style={{
+                maxHeight: "60vh",
+                maxWidth: "79vw",
+                WebkitOverflowScrolling: "touch",
+              }}
+            >
+              <table className="w-full text-left text-sm">
+                <thead className=" bg-[#F5F7FB] text-[#141414] font-semibold font-['Roboto'] text-[13px]">
+                  <tr>
+                    <th className="p-3">All</th>
+                    <th className="p-3">No</th>
+                    <th className="p-3">Company name</th>
+                    <th className="p-3">GST or Pan</th>
+                    <th className="p-3">Order ID</th>
+                    <th className="p-3">Invoice ID</th>
+                    <th className="p-3">Issued date</th>
+                    <th className="p-3">Invoice amount</th>
+                    <th className="p-3">Department</th>
+                    <th className="p-3">Remark</th>
+                  </tr>
+                </thead>
 
-              <tbody>
-                {filteredInvoices.map((inv, index) => (
-                  <React.Fragment key={inv.id}>
-                    <tr
-                      onClick={() => toggleRow(inv.id)}
-                      className={`cursor-pointer border-t border-[#E5E9F2] transition-colors ${
-                        expandedRow === inv.id
-                          ? "bg-[#13255B]"
-                          : index % 2 === 0
-                          ? "bg-[#F0F0F0]"
-                          : "bg-white hover:bg-[#F9FAFB]"
-                      }`}
-                    >
-                      {(() => {
-                        var textColorClass =
+                <tbody>
+                  {filteredInvoices.map((inv, index) => (
+                    <React.Fragment key={inv.id}>
+                      <tr
+                        onClick={() => toggleRow(inv.id)}
+                        className={`cursor-pointer border-t border-[#E5E9F2] transition-colors ${
                           expandedRow === inv.id
-                            ? "text-white"
-                            : "text-[#575757]";
-                        return (
-                          <>
-                            <td
-                              className={`p-4 align-middle ${textColorClass}`}
-                            >
-                              <input type="checkbox" />
-                            </td>
-                            <td
-                              className={`p-4 align-middle font-normal text-[14px] font-['Roboto'] ${textColorClass}`}
-                            >
-                              {inv.id}
-                            </td>
-                            <td
-                              className={`p-4 align-middle max-w-[95px] truncate whitespace-nowrap overflow-hidden text-ellipsis font-normal text-[14px] font-['Roboto'] ${textColorClass}`}
-                              title={inv.company}
-                            >
-                              {inv.company}
-                            </td>
-                            <td
-                              className={`p-4 align-middle font-normal text-[14px] font-['Roboto'] ${textColorClass}`}
-                            >
-                              {inv.gst}
-                            </td>
-                            <td
-                              className={`p-4 align-middle font-normal text-[14px] font-['Roboto'] ${textColorClass}`}
-                            >
-                              {inv.orderId}
-                            </td>
-                            <td
-                              className={`p-4 align-middle font-normal text-[14px] font-['Roboto'] ${textColorClass}`}
-                            >
-                              {inv.invoiceId}
-                            </td>
-                            <td
-                              className={`p-4 align-middle whitespace-nowrap leading-[20px] h-[40px] font-normal text-[14px] font-['Roboto'] ${textColorClass}`}
-                            >
-                              {inv.issuedDate}
-                            </td>
-                            <td
-                              className={`p-4 align-middle whitespace-nowrap flex justify-between font-normal text-[15px] font-['Roboto'] ${textColorClass}`}
-                            >
-                              <span>₹</span>{" "}
-                              <span
-                                className={` ${
-                                  expandedRow === inv.id
-                                    ? "text-white"
-                                    : "text-[#141414]"
-                                }`}
+                            ? "bg-[#13255B]"
+                            : index % 2 === 0
+                            ? "bg-[#F0F0F0]"
+                            : "bg-white hover:bg-[#F9FAFB]"
+                        }`}
+                      >
+                        {(() => {
+                          var textColorClass =
+                            expandedRow === inv.id
+                              ? "text-white"
+                              : "text-[#575757]";
+                          return (
+                            <>
+                              <td
+                                className={`p-4 align-middle ${textColorClass}`}
                               >
-                                {inv.amount}
-                              </span>
-                            </td>
-                            <td
-                              className={`p-4 align-middle font-normal text-[14px] font-['Roboto'] ${textColorClass}`}
-                            >
-                              {inv.department}
-                            </td>
-                            <td
-                              className={`p-4 flex items-center justify-between align-middle font-normal text-[14px] font-['Roboto'] ${textColorClass}`}
-                            >
-                              {expandedRow === inv.id ? "Not paid" : ""}
-                              {expandedRow === inv.id ? (
-                                <ChevronUp size={18} className="text-white" />
-                              ) : (
-                                <ChevronDown
-                                  size={18}
-                                  className="text-[#575757]"
-                                />
-                              )}
-                            </td>
-                          </>
-                        );
-                      })()}
-                    </tr>
-
-                    {expandedRow === inv.id && (
-                      <tr>
-                        <td
-                          colSpan={10}
-                          className="bg-[#F5F7FB] px-6 py-4 text-[#1F2439] align-top"
-                        >
-                          <div className="text-[15px] text-[#141414] font-medium mb-2 font-['Roboto']">
-                            Remark
-                          </div>
-                          <div
-                            className="text-[#222222] text-[14px] font-normal leading-[22px] tracking-[0.2px] font-['Roboto'] whitespace-pre-line break-words"
-                            style={{
-                              maxWidth: "81%",
-                              wordBreak: "break-word",
-                            }}
-                          >
-                            {inv.remark}
-                          </div>
-                        </td>
+                                <input type="checkbox" />
+                              </td>
+                              <td
+                                className={`p-4 align-middle font-normal text-[14px] font-['Roboto'] ${textColorClass}`}
+                              >
+                                {inv.id}
+                              </td>
+                              <td
+                                className={`p-4 align-middle max-w-[95px] truncate whitespace-nowrap overflow-hidden text-ellipsis font-normal text-[14px] font-['Roboto'] ${textColorClass}`}
+                                title={inv.company}
+                              >
+                                {inv.company}
+                              </td>
+                              <td
+                                className={`p-4 align-middle font-normal text-[14px] font-['Roboto'] ${textColorClass}`}
+                              >
+                                {inv.gst}
+                              </td>
+                              <td
+                                className={`p-4 align-middle font-normal text-[14px] font-['Roboto'] ${textColorClass}`}
+                              >
+                                {inv.orderId}
+                              </td>
+                              <td
+                                className={`p-4 align-middle font-normal text-[14px] font-['Roboto'] ${textColorClass}`}
+                              >
+                                {inv.invoiceId}
+                              </td>
+                              <td
+                                className={`p-4 align-middle whitespace-nowrap leading-[20px] h-[40px] font-normal text-[14px] font-['Roboto'] ${textColorClass}`}
+                              >
+                                {inv.issuedDate}
+                              </td>
+                              <td
+                                className={`p-4 align-middle whitespace-nowrap flex justify-between font-normal text-[15px] font-['Roboto'] ${textColorClass}`}
+                              >
+                                <span>₹</span>{" "}
+                                <span
+                                  className={` ${
+                                    expandedRow === inv.id
+                                      ? "text-white"
+                                      : "text-[#141414]"
+                                  }`}
+                                >
+                                  {inv.amount}
+                                </span>
+                              </td>
+                              <td
+                                className={`p-4 align-middle font-normal text-[14px] font-['Roboto'] ${textColorClass}`}
+                              >
+                                {inv.department}
+                              </td>
+                              <td
+                                className={`p-4 flex items-center justify-between align-middle font-normal text-[14px] font-['Roboto'] ${textColorClass}`}
+                              >
+                                {expandedRow === inv.id ? "Not paid" : ""}
+                                {expandedRow === inv.id ? (
+                                  <ChevronUp size={18} className="text-white" />
+                                ) : (
+                                  <ChevronDown
+                                    size={18}
+                                    className="text-[#575757]"
+                                  />
+                                )}
+                              </td>
+                            </>
+                          );
+                        })()}
                       </tr>
-                    )}
-                  </React.Fragment>
-                ))}
-              </tbody>
-            </table>
+
+                      {expandedRow === inv.id && (
+                        <tr>
+                          <td
+                            colSpan={10}
+                            className="bg-[#F5F7FB] px-6 py-4 text-[#1F2439] align-top"
+                          >
+                            <div className="text-[15px] text-[#141414] font-medium mb-2 font-['Roboto']">
+                              Remark
+                            </div>
+                            <div
+                              className="text-[#222222] text-[14px] font-normal leading-[22px] tracking-[0.2px] font-['Roboto'] whitespace-pre-line break-words"
+                              style={{
+                                maxWidth: "81%",
+                                wordBreak: "break-word",
+                              }}
+                            >
+                              {inv.remark}
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </React.Fragment>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <div className="mt-8 mb-8">

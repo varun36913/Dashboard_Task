@@ -14,8 +14,7 @@ import CalendarMini from "./components/CalendarMini";
 import PaginationControl from "./components/PaginationControl";
 import InvoiceTable from "./pages/InvoiceTable";
 import InvoiceTableRejection from "./pages/InvoiceTableRejection";
-
-const API = "http://localhost:4000";
+import { API_BASE_URL } from "../src/API/config";
 
 function DashboardPage() {
   const [data, setData] = useState(null);
@@ -23,7 +22,7 @@ function DashboardPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${API}/dashboard`)
+    fetch(`${API_BASE_URL}/dashboard`)
       .then((r) => r.json())
       .then((json) => {
         setData(json);
